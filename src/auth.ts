@@ -1,16 +1,16 @@
-import { credentials } from './config';
+import { polymarketCredentials } from './config';
 import { sign } from '@noble/ed25519';
 
 const missing = [];
-if (!credentials.privateKey) missing.push('PRIVATE_KEY');
-if (!credentials.apiKeyId) missing.push('POLY_API_KEY');
+if (!polymarketCredentials.apiKeyId) missing.push('POLY_API_KEY');
+if (!polymarketCredentials.ed25519Key) missing.push('POLY_ED25519_KEY');
 if (missing.length) {
   throw new Error(`Missing environment variables: ${missing.join(', ')}`);
 }
 
-const privateKeyBytes = Buffer.from(credentials.privateKey, 'base64');
+const privateKeyBytes = Buffer.from(polymarketCredentials.ed25519Key, 'base64');
 if (![32, 64].includes(privateKeyBytes.length)) {
-  throw new Error('PRIVATE_KEY must be a base64-encoded 32- or 64-byte Ed25519 key.');
+  throw new Error('POLY_ED25519_KEY must be a base64-encoded 32- or 64-byte Ed25519 key.');
 }
 
 export async function buildAuthHeaders(method: string, path: string) {
@@ -19,7 +19,7 @@ export async function buildAuthHeaders(method: string, path: string) {
   const signatureBytes = await sign(new TextEncoder().encode(payload), privateKeyBytes);
   return {
     'Content-Type': 'application/json',
-    'X-PM-Access-Key': credentials.apiKeyId,
+    'X-PM-Access-Key': polymarketCredentials.apiKeyId,
     'X-PM-Timestamp': timestamp,
     'X-PM-Signature': Buffer.from(signatureBytes).toString('base64'),
   };

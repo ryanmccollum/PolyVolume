@@ -27,7 +27,14 @@ export const settings: Settings = {
   fetchIntervalMs: Math.max(2000, toNumber(env.FETCH_INTERVAL_MS, 15_000)),
 };
 
-export const credentials = {
-  privateKey: env.PRIVATE_KEY ?? '',
+export const walletPrivateKey = env.PRIVATE_KEY ?? '';
+
+export interface PolymarketCredentials {
+  apiKeyId: string;
+  ed25519Key: string;
+}
+
+export const polymarketCredentials: PolymarketCredentials = {
   apiKeyId: env.POLY_API_KEY ?? '',
+  ed25519Key: env.POLY_ED25519_KEY ?? '',
 };
