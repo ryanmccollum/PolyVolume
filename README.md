@@ -7,7 +7,9 @@ Profiles markets for outcomes trading around the 0.50 line and places a queued b
 ## Quick start
 
 1. Copy `./.env.example` to `.env` and complete every key (especially `PRIVATE_KEY` and `POLY_API_KEY`).
-2. `npm install && npm run build && npm start`.
+2. npm install
+3. npm run build
+4. npm start
 
 ## Environment knobs
 
