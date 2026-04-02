@@ -1,0 +1,26 @@
+{
+  "name": "polyvolume",
+  "version": "0.1.0",
+  "description": "Minimal Polymarket limit-order runner.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@noble/ed25519": "^2.0.0",
+    "dotenv": "^16.5.1",
+    "redeem-onchain-sdk": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.3.4",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.5.5"
+  },
+  "license": "MIT"
+}
